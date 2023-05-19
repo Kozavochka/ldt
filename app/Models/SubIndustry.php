@@ -12,4 +12,10 @@ class SubIndustry extends Model
     protected $fillable = [
         'name'
     ];
+
+    //Relation to Company
+    public function companies()
+    {
+        return $this->hasMany(Company::class);
+    }
 }

@@ -1,8 +1,5 @@
 <?php
 
-use App\Models\Industry;
-use App\Models\SubIndustry;
-use App\Models\Tax;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('taxes', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignIdFor(Industry::class);
-            $table->foreignIdFor(SubIndustry::class);
-            $table->foreignIdFor(Tax::class);
-
-            $table->unsignedDecimal('staff')->nullable();
-            $table->unsignedDecimal('salary')->nullable();
+            $table->unsignedDouble('profit_tax')->nullable();
+            $table->unsignedDouble('property_tax')->nullable();
+            $table->unsignedDouble('land_tax')->nullable();
+            $table->unsignedDouble('ndfl')->nullable();
+            $table->unsignedDouble('transport_tax')->nullable();
+            $table->unsignedDouble('other_tax')->nullable();
 
             $table->timestamps();
         });
@@ -37,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('taxes');
     }
 };
