@@ -11,14 +11,15 @@ class CompanyController extends Controller
 
     public function index()
     {
-        $data = Company::query()
+        $companies = Company::query()
             ->with('industry')
             ->with('sub_industry')
             ->with('tax')
-            ->paginate(5);
+            ->paginate(6);
 
 //        return $data;
-        return CompanyResource::collection($data);
+//        return CompanyResource::collection($data);
+        return view('companies', compact('companies'));
     }
 
     /**
