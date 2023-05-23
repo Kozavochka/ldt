@@ -11,23 +11,10 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    <a class="nav-link active" aria-current="page" href="">Home</a>
                 </li>
             </ul>
         </div>
@@ -36,14 +23,24 @@
 
 <div class="album py-5 bg-light">
     <div class="container">
-
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             @foreach( $companies as $company)
                 <div class="col">
-                    <p>{{$company->id}}  {{$company->industry->name}}</p>
+                    <div class="id"> {{$company->id}}</div>
+                    Отрасль
+                    <p>{{$company->industry->name}}</p>
+                    Подотрасль
                     <p>{{$company->sub_industry->name}}</p>
                 </div>
             @endforeach
+        </div>
+        <div class="filters">
+            <a href="{{ url()->current() }}?filter[industry_id]=1 ">Фильтр отрасли</a>
+            <a href="{{ url()->current() }}?filter[sub_industry_id]=5 ">Фильтр подотрасли</a>
+            <a href="{{ url()->current() }}?{{ http_build_query(request()->except('filter')) }}">Сбросить фильтр</a>
+        </div>
+        <div class="mt-3">
+            {{$companies->withQueryString()->links('pagination::bootstrap-5')}}
         </div>
     </div>
 </div>

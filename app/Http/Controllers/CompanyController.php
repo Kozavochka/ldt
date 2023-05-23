@@ -5,20 +5,28 @@ namespace App\Http\Controllers;
 use App\Http\Resources\CompanyResource;
 use App\Models\Company;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class CompanyController extends Controller
 {
 
     public function index()
     {
-        $companies = Company::query()
+        $page = request('page', 1);
+        $perPage = request('per_page', 6);
+
+        $companies =QueryBuilder::for(Company::class)
             ->with('industry')
             ->with('sub_industry')
             ->with('tax')
-            ->paginate(6);
+            ->allowedFilters([
+                AllowedFilter::exact('industry_id'),//точечный по отрасли
+                AllowedFilter::exact('sub_industry_id'),//точечный подотрасли
+            ])
+            ->paginate($perPage, '*', 'page', $page);
 
-//        return $data;
-//        return CompanyResource::collection($data);
+//        return CompanyResource::collection($companies);
         return view('companies', compact('companies'));
     }
 
