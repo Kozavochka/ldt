@@ -1,0 +1,9 @@
+.dropdown-menu{
+    height: 200px;
+    overflow: auto;
+}
+
+.filters{
+    display: flex;
+    gap: 40px;
+}

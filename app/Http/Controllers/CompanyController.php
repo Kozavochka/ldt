@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\CompanyResource;
 use App\Models\Company;
+use App\Models\Industry;
+use App\Models\SubIndustry;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -26,15 +28,19 @@ class CompanyController extends Controller
             ])
             ->paginate($perPage, '*', 'page', $page);
 
+        $industries = Industry::query()
+            ->distinct()
+            ->get();
+
+        $sub_industries = SubIndustry::query()
+            ->distinct()
+            ->get();
+
 //        return CompanyResource::collection($companies);
-        return view('companies', compact('companies'));
+        return view('companies', compact('companies', 'industries', 'sub_industries'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         //
