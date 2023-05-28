@@ -17,5 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect()->route('companies.index');
 });
-Route::get('companies-fill', [CompanyController::class,'fill_rand'])->name('fill_rand');
+
 Route::resource('companies', CompanyController::class);
