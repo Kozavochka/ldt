@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('companies.index');
 });
-Route::resource('companies', \App\Http\Controllers\CompanyController::class);
+Route::get('companies-fill', [CompanyController::class,'fill_rand'])->name('fill_rand');
+Route::resource('companies', CompanyController::class);
