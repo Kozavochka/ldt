@@ -21,6 +21,7 @@ class CompanyResource extends JsonResource
             'staff_count' => $this->staff,
             'salary' => $this->salary,
             'taxes' => $this->tax,
+            'region' => $this->region->name,
         ];
     }
 }

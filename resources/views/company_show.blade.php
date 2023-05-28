@@ -21,7 +21,7 @@
                             Затраты на обслуживание
                         </a>
                         <ul class="dropdown-menu">
-                            <p>Общие затраты {{$company->all_tax}} тыс. руб</p>
+                            <p><b>Общие затраты</b> {{$company->all_tax}} тыс. руб</p>
                             <p>Средние количество персонала: {{$company->staff}}</p>
                             <p>Средняя зарплата: {{$company->salary}} тыс. руб</p>
                             <br>

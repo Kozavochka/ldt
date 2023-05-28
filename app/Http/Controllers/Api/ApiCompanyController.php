@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\CompanyResource;
 use App\Models\Company;
 use App\Models\Industry;
-use App\Models\Region;
 use App\Models\SubIndustry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class CompanyController extends Controller
+class ApiCompanyController extends Controller
 {
 
     public function index()
@@ -26,25 +26,14 @@ class CompanyController extends Controller
             ->with('tax')
             ->with('region')
             ->allowedFilters([
-                AllowedFilter::exact('industry_id'),//точечный фильтр по отрасли
-                AllowedFilter::exact('sub_industry_id'),//точечный фильтр подотрасли
-                AllowedFilter::exact('region_id'),//точечный фильтр региона
+                AllowedFilter::exact('industry_id'),//точечный по отрасли
+                AllowedFilter::exact('sub_industry_id'),//точечный подотрасли
             ])
             ->paginate($perPage, '*', 'page', $page);
 
-        $industries = Industry::query()
-            ->distinct()
-            ->get();
 
-        $sub_industries = SubIndustry::query()
-            ->distinct()
-            ->get();
+        return CompanyResource::collection($companies);
 
-        $regions = Region::query()
-            ->distinct()
-            ->get();
-
-        return view('companies', compact('companies', 'industries', 'sub_industries', 'regions'));
     }
 
 
@@ -62,19 +51,18 @@ class CompanyController extends Controller
 
     public function show(Company $company)
     {
-        return view('company_show', compact('company'));
+        return new CompanyResource($company);
     }
 
 
     public function edit($id)
     {
-        //
-    }
 
+    }
 
     public function update(Request $request, $id)
     {
-        //
+
     }
 
 
@@ -82,7 +70,5 @@ class CompanyController extends Controller
     {
 
     }
-
-
 
 }

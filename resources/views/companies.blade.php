@@ -30,6 +30,13 @@
             </a>
             @include('filter_sub_industry')
         </div>
+        <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href=" " role="button" id="dropdownMenuLink"
+               data-bs-toggle="dropdown" aria-expanded="false">
+                Фильтр региона
+            </a>
+            @include('filter_region')
+        </div>
         <a href="{{ url()->current() }}?{{ http_build_query(request()->except('filter')) }}">Сбросить фильтр</a>
     </div>
     <div class="mt-3">
