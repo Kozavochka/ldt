@@ -49,4 +49,10 @@ class Company extends Model
     {
         return $this->belongsTo(Region::class);
     }
+
+    public function getAllTaxAttribute()
+    {
+        return $this->tax->profit_tax+ $this->tax->property_tax + $this->tax->land_tax
+            + $this->tax->ndfl + $this->tax->transport_tax + $this->tax->other_tax;
+    }
 }

@@ -101,24 +101,9 @@ class CompanyController extends Controller
 
     public function fincance_expense()
     {
-        
+
     }
-    
-    
-    public function fill_rand()
-    {
-        $records = DB::table('companies')->get();
 
 
-        // Обновляем каждую запись, заполняя поле 'field_name' случайным числом от 1 до 100
-        foreach ($records as $record) {
-            DB::table('companies')
-                ->where('id', $record->id)
-                ->update(['region_id' => rand(1, 12)]);
-        }
 
-        return [
-            'result' => true,
-        ];
-    }
 }

@@ -21,8 +21,16 @@
                             Затраты на обслуживание
                         </a>
                         <ul class="dropdown-menu">
-                           lorem
-                            {{--Вывести инфу и сделать аксессор на общую стоимость--}}
+                            <p>Общие затраты {{$company->all_tax}} тыс. руб</p>
+                            <p>Средние количество персонала: {{$company->staff}}</p>
+                            <p>Средняя зарплата: {{$company->salary}} тыс. руб</p>
+                            <br>
+                            <p>Налог на прибыль: {{$company->tax->profit_tax}} тыс.руб</p>
+                            <p>Налог на имущество: {{$company->tax->property_tax}} тыс.руб</p>
+                            <p>Налог на землю: {{$company->tax->land_tax}} тыс.руб</p>
+                            <p>НДФЛ: {{$company->tax->ndfl}} тыс.руб</p>
+                            <p>Транспортный налог: {{$company->tax->transport_tax}} тыс.руб</p>
+                            <p>Прочие: {{$company->tax->other_tax}} тыс.руб</p>
                         </ul>
                     </div>
                     <a href="#" class="card-link">Затраты на строительство</a>
