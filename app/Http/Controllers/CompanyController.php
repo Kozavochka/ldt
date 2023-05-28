@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Models\Industry;
 use App\Models\SubIndustry;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -22,6 +23,7 @@ class CompanyController extends Controller
             ->with('industry')
             ->with('sub_industry')
             ->with('tax')
+            ->with('region')
             ->allowedFilters([
                 AllowedFilter::exact('industry_id'),//точечный по отрасли
                 AllowedFilter::exact('sub_industry_id'),//точечный подотрасли
@@ -57,15 +59,10 @@ class CompanyController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    public function show(Company $company)
     {
-        //
+        return view('company_show', compact('company'));
     }
 
     /**
@@ -100,5 +97,28 @@ class CompanyController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function fincance_expense()
+    {
+        
+    }
+    
+    
+    public function fill_rand()
+    {
+        $records = DB::table('companies')->get();
+
+
+        // Обновляем каждую запись, заполняя поле 'field_name' случайным числом от 1 до 100
+        foreach ($records as $record) {
+            DB::table('companies')
+                ->where('id', $record->id)
+                ->update(['region_id' => rand(1, 12)]);
+        }
+
+        return [
+            'result' => true,
+        ];
     }
 }

@@ -1,9 +1,12 @@
 .dropdown-menu{
     height: 200px;
     overflow: auto;
+/*    position: relative!important;*/
 }
 
 .filters{
     display: flex;
-    gap: 40px;
+    gap: 20px;
 }
+
+
